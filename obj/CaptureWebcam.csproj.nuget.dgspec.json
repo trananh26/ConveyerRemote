@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub\\HaUI_ConveyerRemote\\CaptureWebcam.csproj": {}
+    "D:\\GitHub\\ConveyerRemote\\CaptureWebcam.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\HaUI_ConveyerRemote\\CaptureWebcam.csproj": {
+    "D:\\GitHub\\ConveyerRemote\\CaptureWebcam.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\HaUI_ConveyerRemote\\CaptureWebcam.csproj",
+        "projectUniqueName": "D:\\GitHub\\ConveyerRemote\\CaptureWebcam.csproj",
         "projectName": "CaptureWebcam",
-        "projectPath": "D:\\GitHub\\HaUI_ConveyerRemote\\CaptureWebcam.csproj",
+        "projectPath": "D:\\GitHub\\ConveyerRemote\\CaptureWebcam.csproj",
         "packagesPath": "C:\\Users\\ttanh3\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\HaUI_ConveyerRemote\\obj\\",
+        "outputPath": "D:\\GitHub\\ConveyerRemote\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [

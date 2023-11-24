@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6OpjodmgihMozC2qn5mRFrgK+yYjcf1e5mjCaE8vmrNkxi3xUi/lXj+54LIQOz2EErToFuIIbZ/Wspz6ePxyeg==",
+  "dgSpecHash": "cHxBKZpDqzJC2J2/cDhRpr476tFSb4pIrWyhR1zl/H1mCDRgadfsnNGGxUnFe4jWbYuk+hGjXZzfI9QxSitE0A==",
   "success": true,
-  "projectFilePath": "D:\\GitHub\\HaUI_ConveyerRemote\\CaptureWebcam.csproj",
+  "projectFilePath": "D:\\GitHub\\ConveyerRemote\\CaptureWebcam.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ttanh3\\.nuget\\packages\\emgu.cv\\4.5.2.4673\\emgu.cv.4.5.2.4673.nupkg.sha512",
     "C:\\Users\\ttanh3\\.nuget\\packages\\emgu.cv.bitmap\\4.5.2.4673\\emgu.cv.bitmap.4.5.2.4673.nupkg.sha512",
