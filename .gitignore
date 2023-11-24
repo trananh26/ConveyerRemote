@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/CaptureWebcam/FileContentIndex
+/.vs/CaptureWebcam/v17
+/obj/Debug/MainWindow.g.cs
+*.lref
+/obj/Debug/CaptureWebcam.csproj.AssemblyReference.cache
+/obj/Debug/CaptureWebcam_MarkupCompile.cache
+/obj/Debug/CaptureWebcam_MarkupCompile.lref
+/obj/Debug/App.baml
+/obj/Debug/MainWindow.baml
+/obj/Debug/MainWindow.g.i.cs
