@@ -1,0 +1,38 @@
+﻿<Window x:Class="CaptureWebcam.wdReport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CaptureWebcam"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"  
+        mc:Ignorable="d" Loaded="Window_Loaded"
+        Title="Báo cáo hoạt động của hệ thống" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <!--<DataGrid x:Name="grdHistory"/>-->
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button x:Name="btnSendReport" Width="120" 
+                    HorizontalAlignment="Right" Margin="0,0,10,0"
+                    Click="btnSendReport_Click"  Background="LightBlue"/>
+            <md:PackIcon Kind="ReceiptSend" Width="25" Height="25" VerticalAlignment="Center" 
+                         HorizontalAlignment="Right" Background="LightBlue"                
+                         Margin="30,0,100,0" MouseDown="btnSendReport_Click"/>
+            <TextBlock Text="Gửi báo cáo" FontSize="14" Height="20" Foreground="Black"
+                       HorizontalAlignment="Right" Margin="0,3,20,0"
+                            MouseDown="btnSendReport_Click"/>
+        </Grid>
+    </Grid>
+</Window>

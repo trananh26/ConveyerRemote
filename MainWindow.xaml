@@ -9,7 +9,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="Phầm mềm giám sát phân loại sản phẩm" 
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
-       Height="1060" Width="1940">
+       Height="1060" Width="1940" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -44,27 +44,18 @@
                            MouseDown="btnDashboard_Click"/>
                 <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
             </Grid>
+           
             <Grid Grid.Row="2" Background="#2E4053">
-                <Button Height="69"  Background="#2E4053" BorderBrush="#2E4053"
-                        x:Name="btnDetail" Click="btnDetail_Click">
-                </Button>
-                <md:PackIcon Kind="Finance" Width="35" Height="35" VerticalAlignment="Center" Background="#2E4053"
-                                         Margin="30,0,0,0" x:Name="picDetail" MouseDown="btnDetail_Click"/>
-                <TextBlock Text=" STK Detail" FontSize="16" Height="20" Foreground="White"
-                           MouseDown="btnDetail_Click" Margin="90,0,0,0"/>
-                <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
-            </Grid>
-            <Grid Grid.Row="3" Background="#2E4053">
                 <Button Height="69"  Background="#2E4053" BorderBrush="#2E4053"
                         x:Name="btnHistory" Click="btnHistory_Click">
                 </Button>
                 <md:PackIcon Kind="ArrangeSendBackward" Width="35" Height="35" VerticalAlignment="Center" 
                                          Margin="30,0,0,0" MouseDown="btnHistory_Click" Background="#2E4053"/>
-                <TextBlock Text="Job History" FontSize="16" Height="20" Margin="90,0,0,0" 
+                <TextBlock Text="History" FontSize="16" Height="20" Margin="90,0,0,0" 
                                MouseDown="btnHistory_Click" Foreground="White"/>
                 <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
             </Grid>
-            <Grid Grid.Row="4" Background="#2E4053">
+            <Grid Grid.Row="3" Background="#2E4053">
                 <Button Height="69"  Background="#2E4053" BorderBrush="#2E4053"
                        x:Name="btnReport" Click="btnReport_Click">
                 </Button>
@@ -74,7 +65,7 @@
                            Margin="90,0,0,0" MouseDown="btnReport_Click"/>
                 <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
             </Grid>
-            <Grid Grid.Row="5" Background="#2E4053">
+            <Grid Grid.Row="4" Background="#2E4053">
                 <Button Height="69"  Background="#2E4053" BorderBrush="#2E4053"
                         x:Name="btnControl" Click="btnControl_Click">
                 </Button>
@@ -84,29 +75,19 @@
                            Margin="90,0,0,0" MouseDown="btnControl_Click"/>
                 <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
             </Grid>
-            <Grid Grid.Row="7" Background="#2E4053">
-                <Button Height="69"  Background="#2E4053" BorderBrush="#2E4053"
-                        x:Name="btnSetting" Click="btnSetting_Click">
-                </Button>
-                <md:PackIcon Kind="CogSyncOutline" Width="35" Height="35" VerticalAlignment="Center" Background="#2E4053"
-                                         Margin="30,0,0,0" MouseDown="btnSetting_Click"/>
-                <TextBlock Text="Setting" FontSize="16" Height="20" Foreground="White"
-                           Margin="90,0,0,0" MouseDown="btnSetting_Click"/>
-                <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
-            </Grid>
-
+           
             <Grid Grid.Row="6" Background="#2E4053">
                 <Button Height="75" x:Name="btnHelp" Click="btnHelp_Click"  VerticalAlignment="Top"
                         Background="#2E4053" BorderBrush="#2E4053">
                 </Button>
                 <md:PackIcon Kind="LinkVariant" Width="35" Height="35" VerticalAlignment="Center" Background="#2E4053"
                                          Margin="30,0,0,0" MouseDown="btnHelp_Click"/>
-                <TextBlock Text="Link System" FontSize="16" Height="20" Margin="90,0,0,0" 
+                <TextBlock Text="Support" FontSize="16" Height="20" Margin="90,0,0,0" 
                                MouseDown="btnHelp_Click" Foreground="White"/>
                 <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
             </Grid>
 
-            <Grid Grid.Row="8" Background="#2E4053">
+            <Grid Grid.Row="5" Background="#2E4053">
                 <Button Height="69" x:Name="btnExit" Click="btnExit_Click" VerticalAlignment="Top"
                         Background="#2E4053" BorderBrush="#2E4053" >
                 </Button>
@@ -116,15 +97,24 @@
                                Foreground="White" MouseDown="btnExit_Click"/>
                 <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
             </Grid>
+            <Grid Grid.Row="7" Background="#2E4053">
+                <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
+
+            </Grid>
+            <Grid Grid.Row="8" Background="#2E4053">
+                <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
+
+            </Grid>
             <Grid Grid.Row="9" Background="#2E4053">
                 <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
 
             </Grid>
+            
 
             <Grid Grid.Row="10" Background="#2E4053">
                 <Image Source=".\Resources\Logo user.png"
                        Width="60" HorizontalAlignment="Left"/>
-                <TextBlock x:Name="lblUser" Text="Trần Tuấn Em" Foreground="White" FontSize="12" Height="15" Margin="60,0,0,0"/>
+                <TextBlock x:Name="lblUser" Text="Admin" Foreground="White" FontSize="12" Height="15" Margin="60,0,0,0"/>
                 <Image Source=".\Resources\green dot.png"
                        Height="8" Width="8" HorizontalAlignment="Left" Margin="60,23,0,0" />
                 <TextBlock  Text="Online" FontSize="8" Height="10" Foreground="White"  Margin="70,25,0,0"/>
