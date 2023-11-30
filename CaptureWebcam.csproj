@@ -81,6 +81,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\clsMaterial.cs" />
+    <Compile Include="Database\BLDatabase.cs" />
+    <Compile Include="Database\DLDatabase.cs" />
+    <Compile Include="wdHelp.xaml.cs">
+      <DependentUpon>wdHelp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wdHistory.xaml.cs">
+      <DependentUpon>wdHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wdManualControl.xaml.cs">
+      <DependentUpon>wdManualControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wdReport.xaml.cs">
+      <DependentUpon>wdReport.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,6 +108,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="wdHelp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wdHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wdManualControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wdReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -170,5 +201,6 @@
     <Resource Include="Resources\ta2.ico" />
     <Resource Include="Resources\taa.PNG" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

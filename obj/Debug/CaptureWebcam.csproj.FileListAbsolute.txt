@@ -107,3 +107,11 @@ D:\GitHub\ConveyerRemote\obj\Debug\CaptureWebcam.csproj.CoreCompileInputs.cache
 D:\GitHub\ConveyerRemote\obj\Debug\CaptureWebcam.csproj.CopyComplete
 D:\GitHub\ConveyerRemote\obj\Debug\CaptureWebcam.exe
 D:\GitHub\ConveyerRemote\obj\Debug\CaptureWebcam.pdb
+D:\GitHub\ConveyerRemote\obj\Debug\wdHelp.g.cs
+D:\GitHub\ConveyerRemote\obj\Debug\wdHistory.g.cs
+D:\GitHub\ConveyerRemote\obj\Debug\wdManualControl.g.cs
+D:\GitHub\ConveyerRemote\obj\Debug\wdReport.g.cs
+D:\GitHub\ConveyerRemote\obj\Debug\wdHelp.baml
+D:\GitHub\ConveyerRemote\obj\Debug\wdHistory.baml
+D:\GitHub\ConveyerRemote\obj\Debug\wdManualControl.baml
+D:\GitHub\ConveyerRemote\obj\Debug\wdReport.baml
