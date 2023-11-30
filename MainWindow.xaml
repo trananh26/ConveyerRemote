@@ -135,7 +135,7 @@
         <Grid Grid.Column="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackPanel>
@@ -162,6 +162,8 @@
                     <Rectangle Width="30" Height="60" Fill="Orange" Margin="-150,-120,0,0"/>
                     <Rectangle Width="30" Height="60" Fill="Orange" Margin="350,-120,0,0"/>
                     <Rectangle Width="60" Height="30" Fill="Orange" Margin="-450,100,0,0"/>
+
+                    <Rectangle Width="150" Height="120" Fill="Brown" Margin="0,-650,140,0"/>
                 </Grid>
                 <Grid Grid.Column="1" >
                     <Grid.RowDefinitions>
