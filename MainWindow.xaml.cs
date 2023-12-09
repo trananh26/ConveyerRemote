@@ -14,6 +14,8 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 using ActUtlTypeLib;
+using AForge.Video;
+using AForge.Video.DirectShow;
 using System.Windows.Controls;
 using System.Net.NetworkInformation;
 using System.Windows.Threading;
@@ -21,6 +23,7 @@ using CaptureWebcam.Database;
 using System.Data;
 using CaptureWebcam.Common;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace CaptureWebcam
 {
@@ -35,7 +38,7 @@ namespace CaptureWebcam
             int cameraFps = 30;
 
             //init the camera
-            capture = new VideoCapture();
+            capture = new VideoCapture(1);
 
             //set the captured frame width and height (default 640x480)
             capture.Set(CapProp.FrameWidth, 1024);
@@ -62,6 +65,9 @@ namespace CaptureWebcam
 
 
         VideoCapture capture;
+        FilterInfoCollection filterInfo;
+        VideoCaptureDevice captureDevice;
+
         Timer timer;
         BLDatabase oBL = new BLDatabase();
         List<clsMaterial> lstMaterial = new List<clsMaterial>();
@@ -102,7 +108,7 @@ namespace CaptureWebcam
                     //AlarmLog.LogAlarmToDatabase("04");
                     MessageBox.Show("Không kết nối được với PLC. Vui lòng kiểm tra lại kết nối", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-               
+
             }
             catch (Exception ex)
             {
@@ -123,7 +129,7 @@ namespace CaptureWebcam
 
                 MessageBox.Show("Có lỗi xảy ra trong quá trình đọc dữ liệu.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-           
+
         }
 
         /// <summary>
@@ -140,7 +146,7 @@ namespace CaptureWebcam
             PLC.GetDevice("M512", out SS2);
             int SS3;
             PLC.GetDevice("M513", out SS3);
-            if (SS1 == 1) 
+            if (SS1 == 1)
             {
                 if (txtQRCode.Text == _oldQRCode || psWait == 1)
                 {
@@ -152,7 +158,7 @@ namespace CaptureWebcam
 
             if (SS2 == 1)
             {
-                
+
             }
 
             if (SS3 == 1)
@@ -223,11 +229,45 @@ namespace CaptureWebcam
             if (CheckLiensce())
             {
                 Connect_PLC();
+
+                filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+
+                captureDevice = new VideoCaptureDevice(filterInfo[1].MonikerString);
+                captureDevice.NewFrame += CaptureDevice_NewFrame;
+                captureDevice.Start();
             }
             else
             {
                 this.Close();
             }
+        }
+
+        private void CaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+
+                string qrcode = FindQrCodeInImage((Bitmap)eventArgs.Frame.Clone());
+
+                if (!string.IsNullOrEmpty(qrcode))
+                {
+                    //set the found text in the qr code in the ui
+                    txtQRCode.Text = qrcode;
+                    txtCheckTime.Text = $"Last scan: {DateTime.Now.ToLongDateString()} at {DateTime.Now.ToShortTimeString()}.";
+
+                    if (qrcode != _oldQRCode)
+                    {
+                        CheckMaterialInfor();
+                    }
+                    //play a sound to indicate qr code found
+                    var player_ok = new SoundPlayer(GetStreamFromResource("sound_ok.wav"));
+                    player_ok.Play();
+
+                    //hide the feed image
+                    feedImage.Visibility = Visibility.Collapsed;
+                }
+
+            });
         }
 
         private bool CheckLiensce()
