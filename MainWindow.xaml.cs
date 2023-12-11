@@ -65,36 +65,36 @@ namespace CaptureWebcam
         }
 
 
-        VideoCapture capture;
+        //VideoCapture capture;
         FilterInfoCollection filterInfo;
         VideoCaptureDevice captureDevice;
 
         System.Timers.Timer timer;
         BLDatabase oBL = new BLDatabase();
         List<clsMaterial> lstMaterial = new List<clsMaterial>();
-        private ActUtlType PLC = new ActUtlType();
+        private ActUtlTypeLib.ActUtlType PLC = new ActUtlTypeLib.ActUtlType();
         private string IP_PLC = "192.168.1.250";
         private string _oldQRCode;
         private int psWait;
 
         private void Connect_PLC()
         {
-            //try
-            //{
-            //    PLC.ActLogicalStationNumber = 25;
-            //    PLC.Open();
-            //    PLC.SetDevice("M1", 1);
+            try
+            {
+                PLC.ActLogicalStationNumber = 25;
+                PLC.Open();
+                PLC.SetDevice("M1", 1);
 
-            //    MessageBox.Show("Kết nối PLC thành công", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("Không kết nối được với PLC. Vui lòng kiểm tra lại kết nối", "Warning", MessageBoxButton.OK, MessageBoxImage.Information);
-            //}
+                MessageBox.Show("Kết nối PLC thành công", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Không kết nối được với PLC. Vui lòng kiểm tra lại kết nối", "Warning", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
         private void TimerPing_Tick(object sender, EventArgs e)
         {
-            PingPLC();
+            //PingPLC();
         }
 
         private void PingPLC()
@@ -141,31 +141,31 @@ namespace CaptureWebcam
         /// Có thông tin --> kệ mẹ n đẩy theo chiều cao
         private void ReadPLCParameter()
         {
-        //    int SS1;
-        //    PLC.GetDevice("M511", out SS1);
-        //    int SS2;
-        //    PLC.GetDevice("M512", out SS2);
-        //    int SS3;
-        //    PLC.GetDevice("M513", out SS3);
-        //    if (SS1 == 1)
-        //    {
-        //        if (txtQRCode.Text == _oldQRCode || psWait == 1)
-        //        {
-        //            // hàng k có mã QRcode hoặc đọc lỗi
-        //        }
+            int SS1;
+            PLC.GetDevice("M511", out SS1);
+            int SS2;
+            PLC.GetDevice("M512", out SS2);
+            int SS3;
+            PLC.GetDevice("M513", out SS3);
+            if (SS1 == 1)
+            {
+                if (txtQRCode.Text == _oldQRCode || psWait == 1)
+                {
+                    // hàng k có mã QRcode hoặc đọc lỗi
+                }
 
 
-        //    }
+            }
 
-        //    if (SS2 == 1)
-        //    {
+            if (SS2 == 1)
+            {
 
-        //    }
+            }
 
-        //    if (SS3 == 1)
-        //    {
+            if (SS3 == 1)
+            {
 
-        //    }
+            }
 
         }
 
@@ -229,13 +229,13 @@ namespace CaptureWebcam
         {
             if (CheckLiensce())
             {
-                Connect_PLC();
+                //Connect_PLC();
 
-                filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                //filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
-                captureDevice = new VideoCaptureDevice(filterInfo[0].MonikerString);
-                captureDevice.NewFrame += CaptureDevice_NewFrame;
-                captureDevice.Start();
+                //captureDevice = new VideoCaptureDevice(filterInfo[0].MonikerString);
+                //captureDevice.NewFrame += CaptureDevice_NewFrame;
+                //captureDevice.Start();
             }
             else
             {

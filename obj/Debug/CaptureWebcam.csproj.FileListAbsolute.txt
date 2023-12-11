@@ -34,16 +34,6 @@ D:\GitHub\ConveyerRemote\bin\Debug\CaptureWebcam.exe
 D:\GitHub\ConveyerRemote\bin\Debug\CaptureWebcam.pdb
 D:\GitHub\ConveyerRemote\bin\Debug\Emgu.CV.Platform.NetStandard.dll
 D:\GitHub\ConveyerRemote\bin\Debug\Emgu.CV.Bitmap.dll
-D:\GitHub\ConveyerRemote\bin\Debug\cvextern.dll
-D:\GitHub\ConveyerRemote\bin\Debug\opencv_videoio_ffmpeg452_64.dll
-D:\GitHub\ConveyerRemote\bin\Debug\concrt140.dll
-D:\GitHub\ConveyerRemote\bin\Debug\msvcp140.dll
-D:\GitHub\ConveyerRemote\bin\Debug\msvcp140_1.dll
-D:\GitHub\ConveyerRemote\bin\Debug\msvcp140_2.dll
-D:\GitHub\ConveyerRemote\bin\Debug\msvcp140_atomic_wait.dll
-D:\GitHub\ConveyerRemote\bin\Debug\msvcp140_codecvt_ids.dll
-D:\GitHub\ConveyerRemote\bin\Debug\vcruntime140.dll
-D:\GitHub\ConveyerRemote\bin\Debug\vcruntime140_1.dll
 D:\GitHub\ConveyerRemote\bin\Debug\MaterialDesignColors.dll
 D:\GitHub\ConveyerRemote\bin\Debug\MaterialDesignColors.pdb
 D:\GitHub\ConveyerRemote\bin\Debug\MaterialDesignThemes.Wpf.dll
