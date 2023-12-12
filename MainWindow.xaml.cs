@@ -25,6 +25,7 @@ using CaptureWebcam.Common;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Configuration;
 
 namespace CaptureWebcam
 {
@@ -58,10 +59,10 @@ namespace CaptureWebcam
             //create a timer that refreshes the webcam feed
             timer = new System.Timers.Timer()
             {
-                Interval = 1000 / cameraFps,
+                Interval = 1000,
                 Enabled = true
             };
-            //timer.Elapsed += new ElapsedEventHandler(timer_Tick);
+            timer.Elapsed += new ElapsedEventHandler(timer_Tick);
         }
 
 
@@ -72,7 +73,7 @@ namespace CaptureWebcam
         System.Timers.Timer timer;
         BLDatabase oBL = new BLDatabase();
         List<clsMaterial> lstMaterial = new List<clsMaterial>();
-        private ActUtlTypeLib.ActUtlType PLC = new ActUtlTypeLib.ActUtlType();
+        //private ActUtlTypeLib.ActUtlType PLC = new ActUtlTypeLib.ActUtlType();
         private string IP_PLC = "192.168.1.250";
         private string _oldQRCode;
         private int psWait;
@@ -81,11 +82,11 @@ namespace CaptureWebcam
         {
             try
             {
-                PLC.ActLogicalStationNumber = 25;
-                PLC.Open();
-                PLC.SetDevice("M1", 1);
+                //PLC.ActLogicalStationNumber = 25;
+                //PLC.Open();
+                //PLC.SetDevice("M1", 1);
 
-                MessageBox.Show("Kết nối PLC thành công", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Kết nối PLC thành công", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception)
             {
@@ -141,55 +142,63 @@ namespace CaptureWebcam
         /// Có thông tin --> kệ mẹ n đẩy theo chiều cao
         private void ReadPLCParameter()
         {
-            int SS1;
-            PLC.GetDevice("M511", out SS1);
-            int SS2;
-            PLC.GetDevice("M512", out SS2);
-            int SS3;
-            PLC.GetDevice("M513", out SS3);
-            if (SS1 == 1)
-            {
-                if (txtQRCode.Text == _oldQRCode || psWait == 1)
-                {
-                    // hàng k có mã QRcode hoặc đọc lỗi
-                }
+            //int SS1;
+            //PLC.GetDevice("M511", out SS1);
+            //int SS2;
+            //PLC.GetDevice("M512", out SS2);
+            //int SS3;
+            //PLC.GetDevice("M513", out SS3);
+            //if (SS1 == 1)
+            //{
+            //    if (txtQRCode.Text == _oldQRCode || psWait == 1)
+            //    {
+            //        // hàng k có mã QRcode hoặc đọc lỗi
+            //    }
 
 
-            }
+            //}
 
-            if (SS2 == 1)
-            {
+            //if (SS2 == 1)
+            //{
 
-            }
+            //}
 
-            if (SS3 == 1)
-            {
+            //if (SS3 == 1)
+            //{
 
-            }
+            //}
 
         }
 
         private void CheckMaterialInfor()
         {
-            DataTable dt = new DataTable();
-            if (dt.Rows.Count == 0)
+            try
             {
-                //Xử lý chờ đẩy ra chỗ k có thông tin hàng
-                psWait = 1;
+                DataTable dt = new DataTable();
+                if (dt.Rows.Count == 0)
+                {
+                    //Xử lý chờ đẩy ra chỗ k có thông tin hàng
+                    psWait = 1;
+                }
+                else
+                {
+                    lstMaterial.Clear();
+                    DataRow dr = dt.Rows[0];
+                    dtg_MaterialInfor.ItemsSource = dt.DefaultView;
+                    clsMaterial _material = new clsMaterial();
+                    _material.QRCode = dr["QRCode"].ToString();
+                    _material.ProductCode = dr["ProductCode"].ToString();
+                    _material.ProductName = dr["ProductName"].ToString();
+                    _material.ProductHeight = dr["ProductHeight"].ToString();
+
+                    ///insert lịch sử phân loại
+                }
             }
-            else
+            catch (Exception)
             {
-                lstMaterial.Clear();
-                DataRow dr = dt.Rows[0];
 
-                clsMaterial _material = new clsMaterial();
-                _material.QRCode = dr["QRCode"].ToString();
-                _material.ProductCode = dr["ProductCode"].ToString();
-                _material.ProductName = dr["ProductName"].ToString();
-                _material.ProductHeight = dr["ProductHeight"].ToString();
-
-                ///insert lịch sử phân loại
             }
+            
         }
 
 
@@ -236,6 +245,8 @@ namespace CaptureWebcam
                 //captureDevice = new VideoCaptureDevice(filterInfo[0].MonikerString);
                 //captureDevice.NewFrame += CaptureDevice_NewFrame;
                 //captureDevice.Start();
+
+                lblServer.Text = "  Server: " + ConfigurationSettings.AppSettings["DatabaseConnection"]; 
             }
             else
             {
@@ -279,7 +290,7 @@ namespace CaptureWebcam
                     if (qrcode != _oldQRCode)
                     {
                         CheckMaterialInfor();
-                        _oldQRCode=qrcode;
+                        _oldQRCode = qrcode;
                     }
                     //play a sound to indicate qr code found
                     var player_ok = new SoundPlayer(GetStreamFromResource("sound_ok.wav"));
@@ -295,7 +306,7 @@ namespace CaptureWebcam
         private bool CheckLiensce()
         {
             bool Result = true;
-            DateTime LiesnceDate = new DateTime(2024, 02, 15, 23, 59, 59);
+            DateTime LiesnceDate = new DateTime(2024, 12, 15, 23, 59, 59);
             DateTime dateTime = DateTime.Now;
 
             int x = (dateTime - LiesnceDate).Days;
@@ -310,8 +321,14 @@ namespace CaptureWebcam
             return Result;
         }
 
-        //private async void timer_Tick(object sender, ElapsedEventArgs e)
-        //{
+        private void timer_Tick(object sender, ElapsedEventArgs e)
+        {
+            this.Dispatcher.Invoke(() =>
+                   {
+                       lblDateTime.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + "  ";
+                   });
+        }
+
         //    try
         //    {
         //        //there is a qr code image visible
