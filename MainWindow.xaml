@@ -8,12 +8,12 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="Phầm mềm giám sát phân loại sản phẩm" 
-        WindowStartupLocation="CenterScreen" WindowState="Maximized"
-       Height="1060" Width="1940" Loaded="Window_Loaded">
+        WindowStartupLocation="CenterScreen" 
+       Height="900" Width="1650" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="6.5*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
 
@@ -25,9 +25,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="10*"/>
+                <RowDefinition Height="16*"/>
                 <RowDefinition Height="1.5*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Background="#2E4053">
@@ -44,7 +42,7 @@
                            MouseDown="btnDashboard_Click"/>
                 <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
             </Grid>
-           
+
             <Grid Grid.Row="2" Background="#2E4053">
                 <Button Height="69"  Background="#2E4053" BorderBrush="#2E4053"
                         x:Name="btnHistory" Click="btnHistory_Click">
@@ -75,7 +73,7 @@
                            Margin="90,0,0,0" MouseDown="btnControl_Click"/>
                 <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
             </Grid>
-           
+
             <Grid Grid.Row="6" Background="#2E4053">
                 <Button Height="75" x:Name="btnHelp" Click="btnHelp_Click"  VerticalAlignment="Top"
                         Background="#2E4053" BorderBrush="#2E4053">
@@ -98,20 +96,9 @@
                 <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
             </Grid>
             <Grid Grid.Row="7" Background="#2E4053">
-                <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
 
             </Grid>
             <Grid Grid.Row="8" Background="#2E4053">
-                <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
-
-            </Grid>
-            <Grid Grid.Row="9" Background="#2E4053">
-                <Rectangle StrokeThickness="1" Width="1" HorizontalAlignment="Right" Fill="Gray"></Rectangle>
-
-            </Grid>
-            
-
-            <Grid Grid.Row="10" Background="#2E4053">
                 <Image Source=".\Resources\Logo user.png"
                        Width="60" HorizontalAlignment="Left"/>
                 <TextBlock x:Name="lblUser" Text="Admin" Foreground="White" FontSize="12" Height="15" Margin="60,0,0,0"/>
@@ -125,42 +112,63 @@
         <Grid Grid.Column="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackPanel>
-                    <TextBlock Width="900" Height="50" VerticalAlignment="Center" Margin="0,10,0,0" TextAlignment="Center" FontSize="40"
-                               Text="TRƯỜNG ĐẠI HỌC CÔNG NGHIỆP HÀ NỘI" HorizontalAlignment="Center" FontWeight="Bold"/>
-                    <TextBlock Width="500" Height="40" VerticalAlignment="Bottom" Margin="0,20,10,-50" TextAlignment="Center"
-                               Text="KHOA ĐIỆN TỬ" HorizontalAlignment="Center" FontWeight="Bold" FontSize="30"/>
-                    <TextBlock Width="500" Height="40" VerticalAlignment="Bottom" Margin="0,60,10,-50" TextAlignment="Center"
-                               Text="TEST CHƠI CHƠI" HorizontalAlignment="Center" FontWeight="Bold" FontSize="30"/>
+                    <TextBlock Width="900" Height="35" VerticalAlignment="Center" 
+                               Margin="0,20,0,-30" TextAlignment="Center" FontSize="28"
+                               Text="TRƯỜNG ĐẠI HỌC CÔNG NGHIỆP HÀ NỘI" 
+                               HorizontalAlignment="Center" FontWeight="Bold"/>
+
+                    <TextBlock Width="500" Height="25" VerticalAlignment="Bottom" 
+                               Margin="0,0,10,-60" TextAlignment="Center"
+                               Text="KHOA ĐIỆN TỬ" HorizontalAlignment="Center" 
+                               FontWeight="Bold" FontSize="20"/>
+
+                    <TextBlock Width="500" Height="25" VerticalAlignment="Bottom" 
+                               Margin="0,65,10,-50" TextAlignment="Center"
+                               Text="TEST CHƠI CHƠI" HorizontalAlignment="Center" 
+                               FontWeight="Bold" FontSize="20"/>
 
                 </StackPanel>
 
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1.5*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-
-                    <Rectangle Width="900" Height="150" Fill="ForestGreen" Margin="0,-350,0,0"/>
-                    <Rectangle Width="90" Height="80" Fill="Black" Margin="0,-350,0,0"/>
-                    <Rectangle Width="150" Height="350" Fill="ForestGreen" Margin="-690,150,0,0"/>
-                    <Rectangle Width="30" Height="60" Fill="Orange" Margin="-150,-120,0,0"/>
-                    <Rectangle Width="30" Height="60" Fill="Orange" Margin="350,-120,0,0"/>
-                    <Rectangle Width="60" Height="30" Fill="Orange" Margin="-450,100,0,0"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <DataGrid x:Name="dtg_MaterialInfor"/>
+                    </Grid>
                 </Grid>
                 <Grid Grid.Column="1" >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="3*"/>
                         <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0"  Background="#0000">
-                        <GroupBox Header="Kết quả vận hành trong ngày" BorderBrush="Aquamarine" Background="{x:Null}" >
-                            <!--<Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0"  Background="Coral">
+
+                        <StackPanel>
+
+                            <Image Name="feedImage" Grid.Row="0" Grid.Column="0" Stretch="Fill" />
+                            <!--<Image Name="Image1" Grid.Row="0" Grid.Column="0" Stretch="Fill" Visibility="Collapsed" />
+
+                            <TextBlock Name="txtQRCode" Grid.Row="1" Grid.Column="0" Foreground="White" Margin="10, 20, 10, 0" HorizontalAlignment="Center" TextAlignment="Center" FontWeight="Bold" FontSize="12" />
+                            <TextBlock Name="txtCheckTime" Grid.Row="1" Grid.Column="0" Foreground="White" Margin="10, 5, 10, 10" HorizontalAlignment="Center" TextAlignment="Center" FontSize="10" />-->
+
+                        </StackPanel>
+
+                        <!--<GroupBox Header="Kết quả vận hành trong ngày" BorderBrush="Aquamarine" Background="{x:Null}" >
+                            -->
+                        <!--<Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
@@ -168,8 +176,8 @@
 
                                 <StackPanel>
                                     -->
-                            <!--vị trí hiển thị các chỉ số hiện tại-->
-                            <!--
+                        <!--vị trí hiển thị các chỉ số hiện tại-->
+                        <!--
 
                                     <TextBlock Height="30" VerticalAlignment="Bottom" Margin="0,10,10,0" FontSize="14"
                                                    Text="Tên hiển thị (*)" HorizontalAlignment="Left" FontWeight="Bold"/>
@@ -183,12 +191,12 @@
                                 </StackPanel>
 
                             </Grid>-->
-                        </GroupBox>
+                        <!--
+                        </GroupBox>-->
                     </Grid>
                     <Grid Grid.Row="1"  Background="#566895">
                         <StackPanel>
 
-                            <Image Name="feedImage" Grid.Row="0" Grid.Column="0" Stretch="Fill" />
                             <Image Name="Image1" Grid.Row="0" Grid.Column="0" Stretch="Fill" Visibility="Collapsed" />
 
                             <TextBlock Name="txtQRCode" Grid.Row="1" Grid.Column="0" Foreground="White" Margin="10, 20, 10, 0" HorizontalAlignment="Center" TextAlignment="Center" FontWeight="Bold" FontSize="12" />
@@ -200,7 +208,21 @@
                 </Grid>
 
             </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1">
+                    <TextBlock x:Name="lblDateTime" VerticalAlignment="Center" 
+                               FontWeight="Bold" HorizontalAlignment="Right"/>
 
+                </Grid>
+                <Grid Grid.Column="0">
+                    <TextBlock x:Name="lblServer" VerticalAlignment="Center" 
+                               FontWeight="Bold" HorizontalAlignment="Left"/>
+                </Grid>
+            </Grid>
         </Grid>
 
     </Grid>

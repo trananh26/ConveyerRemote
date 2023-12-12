@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CaptureWebcam"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:v="clr-namespace:CaptureWebcam.View"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -12,8 +13,8 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"  
-        mc:Ignorable="d" Loaded="Window_Loaded"
-        Title="Báo cáo hoạt động của hệ thống" Height="450" Width="800">
+        mc:Ignorable="d" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
+        Title="Báo cáo hoạt động của hệ thống" Height="800" Width="1400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
@@ -21,17 +22,85 @@
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
-            <!--<DataGrid x:Name="grdHistory"/>-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <v:PieChartExample x:Name="uc_ReportByTall"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <v:PieChartExample x:Name="uc_ReportByMaterialType"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <TextBlock Text="Tỷ lệ sản phẩm phân loại theo chiều cao"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               FontSize="14" FontWeight="Bold"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <TextBlock Text="Tỷ lệ sản phẩm phân loại theo loại hàng"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               FontSize="14" FontWeight="Bold"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <v:TemplatureLineChart x:Name="uc_ReportByTimeHeight"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <v:TemplatureLineChart x:Name="uc_ReportByTimeMaterial"/>
+                </Grid>
+
+            </Grid>
+            
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <TextBlock Text="Lịch sử sản phẩm phân loại theo chiều cao"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               FontSize="14" FontWeight="Bold"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <TextBlock Text="Lịch sử sản phẩm phân loại theo loại hàng"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               FontSize="14" FontWeight="Bold"/>
+                </Grid>
+            </Grid>
         </Grid>
         <Grid Grid.Row="2">
-            <Button x:Name="btnSendReport" Width="120" 
-                    HorizontalAlignment="Right" Margin="0,0,10,0"
+            <Button x:Name="btnSendReport" Width="120" BorderBrush="Black"
+                    HorizontalAlignment="Right" Margin="0,0,15,0"
                     Click="btnSendReport_Click"  Background="LightBlue"/>
-            <md:PackIcon Kind="ReceiptSend" Width="25" Height="25" VerticalAlignment="Center" 
+            <md:PackIcon Kind="ReceiptSend" Width="20" Height="20" VerticalAlignment="Center" 
                          HorizontalAlignment="Right" Background="LightBlue"                
-                         Margin="30,0,100,0" MouseDown="btnSendReport_Click"/>
+                         Margin="0,0,110,0" MouseDown="btnSendReport_Click"/>
             <TextBlock Text="Gửi báo cáo" FontSize="14" Height="20" Foreground="Black"
-                       HorizontalAlignment="Right" Margin="0,3,20,0"
+                       HorizontalAlignment="Right" Margin="0,3,25,0"
                             MouseDown="btnSendReport_Click"/>
         </Grid>
     </Grid>

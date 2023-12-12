@@ -28,7 +28,8 @@ namespace CaptureWebcam.Database
 
         public DataSet GetHistoryForReport()
         {
-            throw new NotImplementedException();
+            DataSet ds = new DataSet();
+            return ds;
         }
     }
 }

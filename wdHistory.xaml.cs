@@ -35,7 +35,7 @@ namespace CaptureWebcam
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _dtReport = oBL.GetHistory();
+            //_dtReport = oBL.GetHistory();
             grdHistory.ItemsSource = _dtReport.DefaultView;
         }
 

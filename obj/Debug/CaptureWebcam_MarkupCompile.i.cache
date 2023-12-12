@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\GitHub\ConveyerRemote\App.xaml
-51275595937
+72093603752
 
-13237312358
+15884638671
 1371778890744
-MainWindow.xaml;wdHelp.xaml;wdHistory.xaml;wdManualControl.xaml;wdReport.xaml;
+MainWindow.xaml;View\PieChartExample.xaml;View\TemplatureLineChart.xaml;wdHelp.xaml;wdHistory.xaml;wdManualControl.xaml;wdReport.xaml;
 
 True
 
