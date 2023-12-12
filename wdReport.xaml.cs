@@ -62,8 +62,10 @@ namespace CaptureWebcam
             uc_ReportByTimeHeight.srOther.Title = "Không có thông tin";
             uc_ReportByTimeHeight.srOther.Values = new ChartValues<double> { 6, 5, 10, 9, 3, 8 };
 
-            uc_ReportByTimeHeight.Label.Labels = new[] {(DateTime.Now.Hour - 5).ToString(), (DateTime.Now.Hour - 4).ToString(), (DateTime.Now.Hour - 3).ToString(),
-                (DateTime.Now.Hour-2).ToString(),(DateTime.Now.Hour-1).ToString(),DateTime.Now.Hour.ToString() };
+            uc_ReportByTimeHeight.Label.Labels = new[] {DateTime.Now.Date.AddDays(-5).ToString("dd/MM/yyyy"), DateTime.Now.Date.AddDays(-4).ToString("dd/MM/yyyy"), DateTime.Now.Date.AddDays(-3).ToString("dd/MM/yyyy"),
+                DateTime.Now.Date.AddDays(-2).ToString("dd/MM/yyyy"),DateTime.Now.Date.AddDays(-1).ToString("dd/MM/yyyy"),DateTime.Now.Date.ToString("dd/MM/yyyy") };
+            //uc_ReportByTimeHeight.Label.Labels = new[] {(DateTime.Now.Hour - 5).ToString(), (DateTime.Now.Hour - 4).ToString(), (DateTime.Now.Hour - 3).ToString(),
+            //    (DateTime.Now.Hour-2).ToString(),(DateTime.Now.Hour-1).ToString(),DateTime.Now.Hour.ToString() };
 
 
             //Dữ liệu vận hành trong tuần
