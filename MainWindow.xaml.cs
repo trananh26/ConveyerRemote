@@ -26,6 +26,9 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Configuration;
+using Microsoft.Win32;
+using System.Windows.Media;
+using System.Runtime.InteropServices;
 
 namespace CaptureWebcam
 {
@@ -198,7 +201,7 @@ namespace CaptureWebcam
             {
 
             }
-            
+
         }
 
 
@@ -240,13 +243,13 @@ namespace CaptureWebcam
             {
                 //Connect_PLC();
 
-                //filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
-                //captureDevice = new VideoCaptureDevice(filterInfo[0].MonikerString);
-                //captureDevice.NewFrame += CaptureDevice_NewFrame;
-                //captureDevice.Start();
+                captureDevice = new VideoCaptureDevice(filterInfo[0].MonikerString);
+                captureDevice.NewFrame += CaptureDevice_NewFrame;
+                captureDevice.Start();
 
-                lblServer.Text = "  Server: " + ConfigurationSettings.AppSettings["DatabaseConnection"]; 
+                lblServer.Text = "  Server: " + ConfigurationSettings.AppSettings["DatabaseConnection"];
             }
             else
             {
@@ -254,53 +257,52 @@ namespace CaptureWebcam
             }
         }
 
+        [DllImport("gdi32.dll", EntryPoint = "DeleteObject")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool DeleteObject([In] IntPtr hObject);
         private void CaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            this.Dispatcher.Invoke(() =>
+            try
             {
-                Bitmap img = (Bitmap)eventArgs.Frame.Clone();
-
-                this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Render, (SendOrPostCallback)delegate
+                this.Dispatcher.Invoke(() =>
                 {
+                    Bitmap img = (Bitmap)eventArgs.Frame.Clone();
+
                     IntPtr hBitmap = img.GetHbitmap();
                     System.Windows.Media.Imaging.BitmapSource bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
                         hBitmap,
                         IntPtr.Zero,
                         Int32Rect.Empty,
-                        System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
-
-                    //DeleteObject(hBitmap);
-
-                    img.Dispose();
-                    GC.Collect();
+                        BitmapSizeOptions.FromEmptyOptions()
+                        );
                     feedImage.Source = bitmapSource;
+                    DeleteObject(hBitmap);
 
-                }, null);
+                    string qrcode = FindQrCodeInImage(img);
 
-
-                string qrcode = FindQrCodeInImage((Bitmap)eventArgs.Frame.Clone());
-
-                //Image1.Source = (Bitmap)eventArgs.Frame.Clone();
-                if (!string.IsNullOrEmpty(qrcode))
-                {
-                    //set the found text in the qr code in the ui
-                    txtQRCode.Text = qrcode;
-                    txtCheckTime.Text = $"Last scan: {DateTime.Now.ToLongDateString()} at {DateTime.Now.ToShortTimeString()}.";
-
-                    if (qrcode != _oldQRCode)
+                    if (!string.IsNullOrEmpty(qrcode))
                     {
-                        CheckMaterialInfor();
-                        _oldQRCode = qrcode;
+                        //set the found text in the qr code in the ui
+                        txtQRCode.Text = qrcode;
+                        txtCheckTime.Text = $"Last scan: {DateTime.Now.ToLongDateString()} at {DateTime.Now.ToShortTimeString()}.";
+
+                        if (qrcode != _oldQRCode)
+                        {
+                            CheckMaterialInfor();
+                            _oldQRCode = qrcode;
+                        }
+                        //play a sound to indicate qr code found
+                        var player_ok = new SoundPlayer(GetStreamFromResource("sound_ok.wav"));
+                        player_ok.Play();
                     }
-                    //play a sound to indicate qr code found
-                    var player_ok = new SoundPlayer(GetStreamFromResource("sound_ok.wav"));
-                    player_ok.Play();
 
-                    //hide the feed image
-                    feedImage.Visibility = Visibility.Collapsed;
-                }
+                });
+            }
+            catch (Exception)
+            {
 
-            });
+            }
+           
         }
 
         private bool CheckLiensce()
@@ -329,77 +331,9 @@ namespace CaptureWebcam
                    });
         }
 
-        //    try
-        //    {
-        //        //there is a qr code image visible
-        //        if (feedImage.Visibility == Visibility.Collapsed)
-        //        {
-        //            timer.Stop();
-
-        //            //the delay time you want to display the qr code in the ui for
-        //            await Task.Run(() => Task.Delay(2500));
-
-        //            //set the image visibility
-        //            this.Dispatcher.Invoke(() =>
-        //            {
-        //                feedImage.Visibility = Visibility.Visible;
-        //                Image1.Visibility = Visibility.Collapsed;
-        //            });
-
-        //            timer.Start();
-        //        }
-
-        //        this.Dispatcher.Invoke(() =>
-        //        {
-        //            var mat1 = capture.QueryFrame();
-        //            var mat2 = new Mat();
-
-        //            //flip the image horizontally
-        //            CvInvoke.Flip(mat1, mat2, FlipType.Horizontal);
-
-        //            //convert the mat to a bitmap
-        //            var bmp = mat2.ToImage<Bgr, byte>().ToBitmap();
-
-        //            //copy the bitmap to a memorystream
-        //            var ms = new MemoryStream();
-        //            bmp.Save(ms, ImageFormat.Bmp);
-
-        //            //display the image on the ui
-        //            feedImage.Source = BitmapFrame.Create(ms);
-
-        //            //try to find a qr code in the feed
-        //            string qrcode = FindQrCodeInImage(bmp);
-
-        //            if (!string.IsNullOrEmpty(qrcode))
-        //            {
-        //                //set the found text in the qr code in the ui
-        //                txtQRCode.Text = qrcode;
-        //                txtCheckTime.Text = $"Last scan: {DateTime.Now.ToLongDateString()} at {DateTime.Now.ToShortTimeString()}.";
-
-        //                if (qrcode != _oldQRCode)
-        //                {
-        //                    CheckMaterialInfor();
-        //                }
-        //                //play a sound to indicate qr code found
-        //                var player_ok = new SoundPlayer(GetStreamFromResource("sound_ok.wav"));
-        //                player_ok.Play();
-
-        //                //hide the feed image
-        //                feedImage.Visibility = Visibility.Collapsed;
-        //            }
-
-        //        });
-        //    }
-        //    catch (Exception ee)
-        //    {
-
-        //        MessageBox.Show(ee.Message);
-        //    }
-
-        //}
-
         private string FindQrCodeInImage(Bitmap bmp)
         {
+            
             //decode the bitmap and try to find a qr code
             var source = new BitmapLuminanceSource(bmp);
             var bitmap = new BinaryBitmap(new HybridBinarizer(source));

@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\GitHub\ConveyerRemote\obj\Debug\
+D:\Github\Conveyer_Remote\obj\Debug\
 CaptureWebcam
 none
 false
 DEBUG;TRACE
-D:\GitHub\ConveyerRemote\App.xaml
+D:\Github\Conveyer_Remote\App.xaml
 72093603752
 
 15884638671
-1371778890744
+137-1715258563
 MainWindow.xaml;View\PieChartExample.xaml;View\TemplatureLineChart.xaml;wdHelp.xaml;wdHistory.xaml;wdManualControl.xaml;wdReport.xaml;
 
 True
