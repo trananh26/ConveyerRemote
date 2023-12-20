@@ -76,7 +76,7 @@ namespace CaptureWebcam
         System.Timers.Timer timer;
         BLDatabase oBL = new BLDatabase();
         List<clsMaterial> lstMaterial = new List<clsMaterial>();
-        //private ActUtlTypeLib.ActUtlType PLC = new ActUtlTypeLib.ActUtlType();
+        private ActUtlTypeLib.ActUtlType PLC = new ActUtlTypeLib.ActUtlType();
         private string IP_PLC = "192.168.1.250";
         private string _oldQRCode;
         private int psWait;
@@ -278,22 +278,34 @@ namespace CaptureWebcam
                     feedImage.Source = bitmapSource;
                     DeleteObject(hBitmap);
 
-                    string qrcode = FindQrCodeInImage(img);
+                    var source = new BitmapLuminanceSource(img);
+                    var bitmap = new BinaryBitmap(new HybridBinarizer(source));
+                    var result = new MultiFormatReader().decode(bitmap);
 
-                    if (!string.IsNullOrEmpty(qrcode))
+                    //no qr code found in bitmap
+                    if (result == null)
                     {
-                        //set the found text in the qr code in the ui
-                        txtQRCode.Text = qrcode;
-                        txtCheckTime.Text = $"Last scan: {DateTime.Now.ToLongDateString()} at {DateTime.Now.ToShortTimeString()}.";
 
-                        if (qrcode != _oldQRCode)
+                    }
+                    else
+                    {
+                        string qrcode = FindQrCodeInImage(img);
+
+                        if (!string.IsNullOrEmpty(qrcode))
                         {
-                            CheckMaterialInfor();
-                            _oldQRCode = qrcode;
+                            //set the found text in the qr code in the ui
+                            txtQRCode.Text = qrcode;
+                            txtCheckTime.Text = $"Last scan: {DateTime.Now.ToLongDateString()} at {DateTime.Now.ToShortTimeString()}.";
+
+                            if (qrcode != _oldQRCode)
+                            {
+                                CheckMaterialInfor();
+                                _oldQRCode = qrcode;
+                            }
+                            //play a sound to indicate qr code found
+                            var player_ok = new SoundPlayer(GetStreamFromResource("sound_ok.wav"));
+                            player_ok.Play();
                         }
-                        //play a sound to indicate qr code found
-                        var player_ok = new SoundPlayer(GetStreamFromResource("sound_ok.wav"));
-                        player_ok.Play();
                     }
 
                 });

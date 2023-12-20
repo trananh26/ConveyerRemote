@@ -1468,7 +1468,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\": {}
+    "C:\\Users\\PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -1476,12 +1476,12 @@
       "projectUniqueName": "D:\\Github\\Conveyer_Remote\\CaptureWebcam.csproj",
       "projectName": "CaptureWebcam",
       "projectPath": "D:\\Github\\Conveyer_Remote\\CaptureWebcam.csproj",
-      "packagesPath": "C:\\Users\\NTNGOC\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
       "outputPath": "D:\\Github\\Conveyer_Remote\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\NTNGOC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -1,22 +1,22 @@
 {
   "version": 2,
-  "dgSpecHash": "jZVWfpkZxiSm6dcnsrRbEz/9CO57Mgh52tjFPoQCDosh7txmI5mjzmB3njuy20c7wr6L3wqdhvLthPGWjo94DA==",
+  "dgSpecHash": "5PaaRPGsw0Hz3QI70zCJxWNSAsty6o3sL+uSVFkP/e0qYE/FqQrIGJOckrx697pSr5vuLnZ5FfY/FnpsSXrtjA==",
   "success": true,
   "projectFilePath": "D:\\Github\\Conveyer_Remote\\CaptureWebcam.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\emgu.cv\\4.5.2.4673\\emgu.cv.4.5.2.4673.nupkg.sha512",
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\emgu.cv.bitmap\\4.5.2.4673\\emgu.cv.bitmap.4.5.2.4673.nupkg.sha512",
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\emgu.cv.runtime.windows\\4.5.2.4673\\emgu.cv.runtime.windows.4.5.2.4673.nupkg.sha512",
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\emgu.runtime.windows.msvc.rt.x64\\19.29.30038.1\\emgu.runtime.windows.msvc.rt.x64.19.29.30038.1.nupkg.sha512",
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\emgu.runtime.windows.msvc.rt.x86\\19.29.30038.1\\emgu.runtime.windows.msvc.rt.x86.19.29.30038.1.nupkg.sha512",
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\materialdesigncolors\\2.1.4\\materialdesigncolors.2.1.4.nupkg.sha512",
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\materialdesignthemes\\4.9.0\\materialdesignthemes.4.9.0.nupkg.sha512",
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512",
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512",
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\system.drawing.primitives\\4.3.0\\system.drawing.primitives.4.3.0.nupkg.sha512",
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\system.runtime\\4.3.1\\system.runtime.4.3.1.nupkg.sha512",
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\system.runtime.interopservices.runtimeinformation\\4.3.0\\system.runtime.interopservices.runtimeinformation.4.3.0.nupkg.sha512",
-    "C:\\Users\\NTNGOC\\.nuget\\packages\\zxing.net\\0.16.6\\zxing.net.0.16.6.nupkg.sha512"
+    "C:\\Users\\PC\\.nuget\\packages\\emgu.cv\\4.5.2.4673\\emgu.cv.4.5.2.4673.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\emgu.cv.bitmap\\4.5.2.4673\\emgu.cv.bitmap.4.5.2.4673.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\emgu.cv.runtime.windows\\4.5.2.4673\\emgu.cv.runtime.windows.4.5.2.4673.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\emgu.runtime.windows.msvc.rt.x64\\19.29.30038.1\\emgu.runtime.windows.msvc.rt.x64.19.29.30038.1.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\emgu.runtime.windows.msvc.rt.x86\\19.29.30038.1\\emgu.runtime.windows.msvc.rt.x86.19.29.30038.1.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\materialdesigncolors\\2.1.4\\materialdesigncolors.2.1.4.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\materialdesignthemes\\4.9.0\\materialdesignthemes.4.9.0.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\system.drawing.primitives\\4.3.0\\system.drawing.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\system.runtime\\4.3.1\\system.runtime.4.3.1.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\system.runtime.interopservices.runtimeinformation\\4.3.0\\system.runtime.interopservices.runtimeinformation.4.3.0.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\zxing.net\\0.16.6\\zxing.net.0.16.6.nupkg.sha512"
   ],
   "logs": []
 }
