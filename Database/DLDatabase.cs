@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CaptureWebcam.Common;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -40,6 +41,63 @@ namespace CaptureWebcam.Database
 
             }
             return dt;
+        }
+
+        /// <summary>
+        /// Lấy thông tin hàng theo QR Code
+        /// </summary>
+        /// <param name="sqlCommand"></param>
+        /// <returns></returns>
+        public DataTable GetMaterialInforByCode(string sqlCommand)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                da = new SqlDataAdapter(sqlCommand, conn);
+                da.Fill(dt);
+                conn.Close();
+            }
+            catch (Exception ee)
+            {
+
+            }
+            return dt;
+        }
+
+        /// <summary>
+        /// insert lịch sử phân loại vào database
+        /// </summary>
+        /// <param name="Stored"></param>
+        /// <param name="material"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void InsertHistory(string Stored, clsMaterial material)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+
+                cmd.Connection = conn;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = Stored;
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@QRCode", material.QRCode);
+                cmd.Parameters.AddWithValue("@ProductCode", material.ProductCode);
+                cmd.Parameters.AddWithValue("@ProductName", material.ProductName);
+                cmd.Parameters.AddWithValue("@ProductHeight", material.ProductHeight);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (Exception ee)
+            {
+
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ using ZXing.Common;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
-using ActUtlTypeLib;
+//using ActUtlTypeLib;
 using AForge.Video;
 using AForge.Video.DirectShow;
 using System.Windows.Controls;
@@ -42,13 +42,6 @@ namespace CaptureWebcam
             //the fps of the webcam
             int cameraFps = 30;
 
-            ////init the camera
-            //capture = new VideoCapture(1);
-
-            //set the captured frame width and height (default 640x480)
-            //capture.Set(CapProp.FrameWidth, 1024);
-            //capture.Set(CapProp.FrameHeight, 768);
-
             DispatcherTimer TimerPing = new DispatcherTimer();
             TimerPing.Interval = TimeSpan.FromSeconds(5);
             TimerPing.Tick += TimerPing_Tick;
@@ -72,11 +65,10 @@ namespace CaptureWebcam
         //VideoCapture capture;
         FilterInfoCollection filterInfo;
         VideoCaptureDevice captureDevice;
-
+        private BLDatabase oBL = new BLDatabase();
         System.Timers.Timer timer;
-        BLDatabase oBL = new BLDatabase();
         List<clsMaterial> lstMaterial = new List<clsMaterial>();
-        private ActUtlTypeLib.ActUtlType PLC = new ActUtlTypeLib.ActUtlType();
+        //private ActUtlTypeLib.ActUtlType PLC = new ActUtlTypeLib.ActUtlType();
         private string IP_PLC = "192.168.1.250";
         private string _oldQRCode;
         private int psWait;
@@ -145,21 +137,24 @@ namespace CaptureWebcam
         /// Có thông tin --> kệ mẹ n đẩy theo chiều cao
         private void ReadPLCParameter()
         {
-            //int SS1;
+            int SS1 = 0;
             //PLC.GetDevice("M511", out SS1);
-            //int SS2;
+            int SS2;
             //PLC.GetDevice("M512", out SS2);
-            //int SS3;
+            int SS3;
             //PLC.GetDevice("M513", out SS3);
-            //if (SS1 == 1)
-            //{
-            //    if (txtQRCode.Text == _oldQRCode || psWait == 1)
-            //    {
-            //        // hàng k có mã QRcode hoặc đọc lỗi
-            //    }
-
-
-            //}
+            if (SS1 == 1)
+            {
+                if (txtQRCode.Text == _oldQRCode || psWait == 1)
+                {
+                    // hàng k có mã QRcode hoặc đọc lỗi ==> on M510 để đẩy xylanh
+                    //PLC.SetDevice("M510", 1);
+                }
+                else
+                {
+                    //PLC.SetDevice("M510", 0);
+                }
+            }
 
             //if (SS2 == 1)
             //{
@@ -173,15 +168,29 @@ namespace CaptureWebcam
 
         }
 
-        private void CheckMaterialInfor()
+        /// <summary>
+        /// Tìm kiếm thông tin hàng vừa được đưa vào
+        /// </summary>
+        private void CheckMaterialInfor( string qrcode)
         {
             try
             {
                 DataTable dt = new DataTable();
+                dt = oBL.GetMaterialInforByCode(qrcode);
                 if (dt.Rows.Count == 0)
                 {
                     //Xử lý chờ đẩy ra chỗ k có thông tin hàng
                     psWait = 1;
+
+                    clsMaterial _material = new clsMaterial();
+                    _material.QRCode = qrcode;
+                    _material.ProductCode = "NoInfor";
+                    _material.ProductName = "NoInfor";
+                    _material.ProductHeight = "NoInfor";
+
+                    ///insert lịch sử phân loại
+                    ///
+                    oBL.InsertHistory(_material);
                 }
                 else
                 {
@@ -195,6 +204,8 @@ namespace CaptureWebcam
                     _material.ProductHeight = dr["ProductHeight"].ToString();
 
                     ///insert lịch sử phân loại
+                    ///
+                    oBL.InsertHistory(_material);
                 }
             }
             catch (Exception)
@@ -260,6 +271,12 @@ namespace CaptureWebcam
         [DllImport("gdi32.dll", EntryPoint = "DeleteObject")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool DeleteObject([In] IntPtr hObject);
+
+        /// <summary>
+        /// Xử lý mở camera và đọc QR Code
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="eventArgs"></param>
         private void CaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             try
@@ -299,7 +316,7 @@ namespace CaptureWebcam
 
                             if (qrcode != _oldQRCode)
                             {
-                                CheckMaterialInfor();
+                                CheckMaterialInfor(qrcode);
                                 _oldQRCode = qrcode;
                             }
                             //play a sound to indicate qr code found
@@ -314,13 +331,17 @@ namespace CaptureWebcam
             {
 
             }
-           
+
         }
 
+        /// <summary>
+        /// Kiểm tra hạn sử dụng hệ thống -- Open tới cuối năm 2024
+        /// </summary>
+        /// <returns></returns>
         private bool CheckLiensce()
         {
             bool Result = true;
-            DateTime LiesnceDate = new DateTime(2024, 12, 15, 23, 59, 59);
+            DateTime LiesnceDate = new DateTime(2024, 12, 31, 23, 59, 59);
             DateTime dateTime = DateTime.Now;
 
             int x = (dateTime - LiesnceDate).Days;
@@ -343,9 +364,14 @@ namespace CaptureWebcam
                    });
         }
 
+        /// <summary>
+        /// Thực hiện tìm mã QR từ ảnh chụp được
+        /// </summary>
+        /// <param name="bmp"></param>
+        /// <returns></returns>
         private string FindQrCodeInImage(Bitmap bmp)
         {
-            
+
             //decode the bitmap and try to find a qr code
             var source = new BitmapLuminanceSource(bmp);
             var bitmap = new BinaryBitmap(new HybridBinarizer(source));

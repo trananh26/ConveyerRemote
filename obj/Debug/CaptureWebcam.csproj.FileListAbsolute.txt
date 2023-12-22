@@ -207,3 +207,45 @@ D:\Github\Conveyer_Remote\obj\Debug\CaptureWebcam.exe
 D:\Github\Conveyer_Remote\obj\Debug\CaptureWebcam.pdb
 D:\Github\Conveyer_Remote\obj\Debug\Interop.ActUtlTypeLib.dll
 D:\Github\Conveyer_Remote\obj\Debug\CaptureWebcam.csproj.ResolveComReference.cache
+D:\GitHub\New folder\obj\Debug\CaptureWebcam.csproj.AssemblyReference.cache
+D:\GitHub\New folder\obj\Debug\CaptureWebcam.csproj.SuggestedBindingRedirects.cache
+D:\GitHub\New folder\obj\Debug\MainWindow.baml
+D:\GitHub\New folder\obj\Debug\MainWindow.g.cs
+D:\GitHub\New folder\obj\Debug\View\PieChartExample.g.cs
+D:\GitHub\New folder\obj\Debug\View\TemplatureLineChart.g.cs
+D:\GitHub\New folder\obj\Debug\wdHelp.g.cs
+D:\GitHub\New folder\obj\Debug\wdHistory.g.cs
+D:\GitHub\New folder\obj\Debug\wdManualControl.g.cs
+D:\GitHub\New folder\obj\Debug\wdReport.g.cs
+D:\GitHub\New folder\obj\Debug\App.g.cs
+D:\GitHub\New folder\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\GitHub\New folder\obj\Debug\CaptureWebcam_MarkupCompile.cache
+D:\GitHub\New folder\obj\Debug\CaptureWebcam_MarkupCompile.lref
+D:\GitHub\New folder\obj\Debug\CaptureWebcam.exe
+D:\GitHub\New folder\obj\Debug\CaptureWebcam.pdb
+D:\GitHub\New folder\bin\Debug\CaptureWebcam.exe.config
+D:\GitHub\New folder\bin\Debug\CaptureWebcam.exe
+D:\GitHub\New folder\bin\Debug\CaptureWebcam.pdb
+D:\GitHub\New folder\bin\Debug\Emgu.CV.Platform.NetStandard.dll
+D:\GitHub\New folder\bin\Debug\Emgu.CV.Bitmap.dll
+D:\GitHub\New folder\bin\Debug\MaterialDesignColors.dll
+D:\GitHub\New folder\bin\Debug\MaterialDesignColors.pdb
+D:\GitHub\New folder\bin\Debug\MaterialDesignThemes.Wpf.dll
+D:\GitHub\New folder\bin\Debug\MaterialDesignThemes.Wpf.pdb
+D:\GitHub\New folder\bin\Debug\Microsoft.Xaml.Behaviors.dll
+D:\GitHub\New folder\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+D:\GitHub\New folder\bin\Debug\System.Drawing.Common.dll
+D:\GitHub\New folder\bin\Debug\zxing.dll
+D:\GitHub\New folder\bin\Debug\zxing.presentation.dll
+D:\GitHub\New folder\obj\Debug\App.baml
+D:\GitHub\New folder\obj\Debug\View\PieChartExample.baml
+D:\GitHub\New folder\obj\Debug\View\TemplatureLineChart.baml
+D:\GitHub\New folder\obj\Debug\wdHelp.baml
+D:\GitHub\New folder\obj\Debug\wdHistory.baml
+D:\GitHub\New folder\obj\Debug\wdManualControl.baml
+D:\GitHub\New folder\obj\Debug\wdReport.baml
+D:\GitHub\New folder\obj\Debug\CaptureWebcam.g.resources
+D:\GitHub\New folder\obj\Debug\CaptureWebcam.Properties.Resources.resources
+D:\GitHub\New folder\obj\Debug\CaptureWebcam.csproj.GenerateResource.cache
+D:\GitHub\New folder\obj\Debug\CaptureWebcam.csproj.CoreCompileInputs.cache
+D:\GitHub\New folder\obj\Debug\CaptureWebcam.csproj.CopyComplete
