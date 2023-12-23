@@ -14,3 +14,5 @@
 /obj/Debug/MainWindow.g.i.cs
 /.vs/Haui_ConveyerRemote/FileContentIndex
 /obj/Debug
+/obj/Release
+/obj/x86
