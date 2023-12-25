@@ -1468,20 +1468,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ttanh3\\.nuget\\packages\\": {}
+    "C:\\Users\\PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GitHub\\New folder\\CaptureWebcam.csproj",
+      "projectUniqueName": "D:\\Github\\Conveyer_Remote\\CaptureWebcam.csproj",
       "projectName": "CaptureWebcam",
-      "projectPath": "D:\\GitHub\\New folder\\CaptureWebcam.csproj",
-      "packagesPath": "C:\\Users\\ttanh3\\.nuget\\packages\\",
-      "outputPath": "D:\\GitHub\\New folder\\obj\\",
+      "projectPath": "D:\\Github\\Conveyer_Remote\\CaptureWebcam.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "D:\\Github\\Conveyer_Remote\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\ttanh3\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

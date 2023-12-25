@@ -1,6 +1,7 @@
 ﻿using CaptureWebcam.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -74,7 +75,7 @@ namespace CaptureWebcam.Database
         /// <param name="Stored"></param>
         /// <param name="material"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void InsertHistory(string Stored, clsMaterial material)
+        public void InsertHistory(string Stored, clsMaterial material, String CommandID)
         {
             try
             {
@@ -87,6 +88,7 @@ namespace CaptureWebcam.Database
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = Stored;
                 cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@CommandID", CommandID);
                 cmd.Parameters.AddWithValue("@QRCode", material.QRCode);
                 cmd.Parameters.AddWithValue("@ProductCode", material.ProductCode);
                 cmd.Parameters.AddWithValue("@ProductName", material.ProductName);

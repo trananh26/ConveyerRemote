@@ -13,7 +13,7 @@ using ZXing.Common;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
-//using ActUtlTypeLib;
+using ActUtlTypeLib;
 using AForge.Video;
 using AForge.Video.DirectShow;
 using System.Windows.Controls;
@@ -29,6 +29,7 @@ using System.Configuration;
 using Microsoft.Win32;
 using System.Windows.Media;
 using System.Runtime.InteropServices;
+using System.ComponentModel.Design;
 
 namespace CaptureWebcam
 {
@@ -68,7 +69,7 @@ namespace CaptureWebcam
         private BLDatabase oBL = new BLDatabase();
         System.Timers.Timer timer;
         List<clsMaterial> lstMaterial = new List<clsMaterial>();
-        //private ActUtlTypeLib.ActUtlType PLC = new ActUtlTypeLib.ActUtlType();
+        private ActUtlType PLC = new ActUtlType();
         private string IP_PLC = "192.168.1.250";
         private string _oldQRCode;
         private int psWait;
@@ -77,11 +78,11 @@ namespace CaptureWebcam
         {
             try
             {
-                //PLC.ActLogicalStationNumber = 25;
-                //PLC.Open();
-                //PLC.SetDevice("M1", 1);
+                PLC.ActLogicalStationNumber = 10;
+                PLC.Open();
+                PLC.SetDevice("M1", 1);
 
-                //MessageBox.Show("Kết nối PLC thành công", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Kết nối PLC thành công", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception)
             {
@@ -148,11 +149,12 @@ namespace CaptureWebcam
                 if (txtQRCode.Text == _oldQRCode || psWait == 1)
                 {
                     // hàng k có mã QRcode hoặc đọc lỗi ==> on M510 để đẩy xylanh
-                    //PLC.SetDevice("M510", 1);
+                    PLC.SetDevice("M510", 1);
+
                 }
                 else
                 {
-                    //PLC.SetDevice("M510", 0);
+                    PLC.SetDevice("M20", 1);
                 }
             }
 
@@ -190,7 +192,8 @@ namespace CaptureWebcam
 
                     ///insert lịch sử phân loại
                     ///
-                    oBL.InsertHistory(_material);
+                    string _commandID = DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + qrcode + "_" + _material.ProductCode;
+                    oBL.InsertHistory(_material, _commandID);
                 }
                 else
                 {
@@ -205,8 +208,10 @@ namespace CaptureWebcam
 
                     ///insert lịch sử phân loại
                     ///
-                    oBL.InsertHistory(_material);
+                    string _commandID = DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + qrcode + "_" + _material.ProductCode;
+                    oBL.InsertHistory(_material, _commandID);
                 }
+                GetPerforment();
             }
             catch (Exception)
             {
@@ -252,7 +257,9 @@ namespace CaptureWebcam
         {
             if (CheckLiensce())
             {
-                //Connect_PLC();
+                Connect_PLC();
+
+                GetPerforment();
 
                 filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
@@ -266,6 +273,17 @@ namespace CaptureWebcam
             {
                 this.Close();
             }
+        }
+
+        /// <summary>
+        /// Lấy kết quả chạy trong ngày
+        /// </summary>
+        private void GetPerforment()
+        {
+            DataTable dt = new DataTable();
+            dt = oBL.GetPerformentToday();
+
+
         }
 
         [DllImport("gdi32.dll", EntryPoint = "DeleteObject")]

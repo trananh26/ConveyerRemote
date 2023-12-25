@@ -1,6 +1,7 @@
 ﻿using CaptureWebcam.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -43,7 +44,7 @@ namespace CaptureWebcam.Database
         /// <returns></returns>
         public DataTable GetMaterialInforByCode(string qrcode)
         {
-            string sqlCommand = "EXEC dbo.Proc_GetMaterialInforByCode @FromDate = '" + qrcode + "'";
+            string sqlCommand = "EXEC dbo.Proc_GetMaterialInforByCode @QRCode = '" + qrcode + "'";
             return db.GetMaterialInforByCode(sqlCommand);
         }
 
@@ -51,10 +52,10 @@ namespace CaptureWebcam.Database
         /// cập nhật lịch sử phân loại sản phẩm
         /// </summary>
         /// <param name="material"></param>
-        public void InsertHistory(clsMaterial material)
+        public void InsertHistory(clsMaterial material, string CommandID)
         {
             string cmd = "Proc_InsertHistory";
-            db.InsertHistory(cmd, material);
+            db.InsertHistory(cmd, material, CommandID);
         }
 
         /// <summary>
@@ -64,7 +65,12 @@ namespace CaptureWebcam.Database
         /// <exception cref="NotImplementedException"></exception>
         public DataTable GetPerformentToday()
         {
-            throw new NotImplementedException();
+            DateTime now = DateTime.Now;
+            DateTime ToDate = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59);
+            DateTime FromDate = new DateTime(now.Year, now.Month, now.Day, 00, 00, 00);
+
+            string sqlCommand = "EXEC dbo.Proc_GetHistoryForExport @FromDate = '" + FromDate + "', @ToDate = '" + ToDate + "'";
+            return db.GetHistoryForExport(sqlCommand);
         }
     }
 }

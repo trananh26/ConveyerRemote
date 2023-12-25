@@ -127,9 +127,9 @@
                                Text="KHOA ĐIỆN TỬ" HorizontalAlignment="Center" 
                                FontWeight="Bold" FontSize="20"/>
 
-                    <TextBlock Width="500" Height="25" VerticalAlignment="Bottom" 
+                    <TextBlock Width="700" Height="25" VerticalAlignment="Bottom" 
                                Margin="0,65,10,-50" TextAlignment="Center"
-                               Text="TEST CHƠI CHƠI" HorizontalAlignment="Center" 
+                               Text="HỆ THỐNG PHÂN LOẠI SẢN PHẨM THEO CHIỀU CAO VÀ LOẠI HÀNG" HorizontalAlignment="Center" 
                                FontWeight="Bold" FontSize="20"/>
 
                 </StackPanel>
@@ -142,8 +142,8 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2.5*"/>
+                        <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <DataGrid x:Name="dtg_MaterialInfor"/>
