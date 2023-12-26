@@ -55,15 +55,15 @@ namespace CaptureWebcam
             foreach (DataRow dr in dt.Rows)
             {
                 ///Theo chiều cao
-                if (dr[""].ToString() == "")
+                if (dr["ProductHeight"].ToString() == "Tall")
                 {
                     _tall++;
                 }
-                else if (dr[""].ToString() == "")
+                else if (dr["ProductHeight"].ToString() == "Mid")
                 {
                     _mid++;
                 }
-                else if (dr[""].ToString() == "")
+                else if (dr["ProductHeight"].ToString() == "Short")
                 {
                     _short++;
                 }
@@ -73,15 +73,15 @@ namespace CaptureWebcam
                 }
 
                 ///Theo loại hàng
-                if (dr[""].ToString() == "")
+                if (dr["ProductCode"].ToString() == "GALAXY Z FOLD 5")
                 {
                     _z5++;
                 }
-                else if (dr[""].ToString() == "")
+                else if (dr["ProductCode"].ToString() == "IPHONE 15 PROMAX")
                 {
                     _i15++;
                 }
-                else if (dr[""].ToString() == "")
+                else if (dr["ProductCode"].ToString() == "SAMSUNG S24 ULTRA")
                 {
                     _s24++;
                 }
