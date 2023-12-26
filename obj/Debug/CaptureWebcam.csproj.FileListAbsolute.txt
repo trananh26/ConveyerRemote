@@ -247,5 +247,5 @@ D:\GitHub\New folder\obj\Debug\CaptureWebcam.Properties.Resources.resources
 D:\GitHub\New folder\obj\Debug\CaptureWebcam.csproj.GenerateResource.cache
 D:\GitHub\New folder\obj\Debug\CaptureWebcam.csproj.CoreCompileInputs.cache
 D:\GitHub\New folder\obj\Debug\CaptureWebcam.csproj.CopyComplete
-D:\Github\Conveyer_Remote\obj\Debug\Interop.ActUtlTypeLib.dll
 D:\Github\Conveyer_Remote\obj\Debug\CaptureWebcam.csproj.ResolveComReference.cache
+D:\GitHub\Conveyer_Remote\obj\Debug\CaptureWebcam.csproj.SuggestedBindingRedirects.cache

@@ -30,12 +30,14 @@ using Microsoft.Win32;
 using System.Windows.Media;
 using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
+using ZXing.QrCode.Internal;
+using LiveCharts;
 
 namespace CaptureWebcam
 {
     public partial class MainWindow : Window
     {
-
+        DispatcherTimer Timer_CheckIP;
         public MainWindow()
         {
             InitializeComponent();
@@ -52,6 +54,10 @@ namespace CaptureWebcam
             TimerReadPLC.Interval = TimeSpan.FromSeconds(0.1);
             TimerReadPLC.Tick += TimerReadPLC_Tick;
             TimerReadPLC.Start();
+
+            Timer_CheckIP = new DispatcherTimer();
+            Timer_CheckIP.Interval = TimeSpan.FromSeconds(3);
+            Timer_CheckIP.Tick += Timer_CheckIP_Tick;
 
             //create a timer that refreshes the webcam feed
             timer = new System.Timers.Timer()
@@ -146,16 +152,8 @@ namespace CaptureWebcam
             //PLC.GetDevice("M513", out SS3);
             if (SS1 == 1)
             {
-                if (txtQRCode.Text == _oldQRCode || psWait == 1)
-                {
-                    // hàng k có mã QRcode hoặc đọc lỗi ==> on M510 để đẩy xylanh
-                    PLC.SetDevice("M510", 1);
+                Timer_CheckIP.Start();
 
-                }
-                else
-                {
-                    PLC.SetDevice("M20", 1);
-                }
             }
 
             //if (SS2 == 1)
@@ -170,10 +168,43 @@ namespace CaptureWebcam
 
         }
 
+        //Tạo lệnh trong trường hợp không đọc được QR Code
+        private void Timer_CheckIP_Tick(object sender, EventArgs e)
+        {
+            if (txtQRCode.Text == _oldQRCode || psWait == 1)
+            {
+                psWait = 1;
+
+                clsMaterial _material = new clsMaterial();
+                _material.QRCode = "NoInfor";
+                _material.ProductCode = "NoInfor";
+                _material.ProductName = "NoInfor";
+                _material.ProductHeight = "NoInfor";
+
+                ///insert lịch sử phân loại
+                ///
+                string _commandID = DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + _material.ProductCode;
+                oBL.InsertHistory(_material, _commandID);
+            }
+            if (psWait == 1)
+            {
+
+                // hàng k có mã QRcode hoặc đọc lỗi ==> on M510 để đẩy xylanh
+                PLC.SetDevice("M510", 1);
+
+            }
+            else
+            {
+                PLC.SetDevice("M20", 1);
+            }
+
+            Timer_CheckIP.Stop();
+        }
+
         /// <summary>
         /// Tìm kiếm thông tin hàng vừa được đưa vào
         /// </summary>
-        private void CheckMaterialInfor( string qrcode)
+        private void CheckMaterialInfor(string qrcode)
         {
             try
             {
@@ -197,6 +228,8 @@ namespace CaptureWebcam
                 }
                 else
                 {
+                    psWait = 0;
+
                     lstMaterial.Clear();
                     DataRow dr = dt.Rows[0];
                     dtg_MaterialInfor.ItemsSource = dt.DefaultView;
@@ -282,7 +315,67 @@ namespace CaptureWebcam
         {
             DataTable dt = new DataTable();
             dt = oBL.GetPerformentToday();
+            double _tall = 0; double _mid = 0; double _short = 0; double _noTallInfor = 0;
+            double _z5 = 0; double _i15 = 0; double _s24 = 0; double _noPrdInfor = 0;
 
+            foreach (DataRow dr in dt.Rows)
+            {
+                ///Theo chiều cao
+                if (dr[""].ToString() == "")
+                {
+                    _tall++;
+                }
+                else if (dr[""].ToString() == "")
+                {
+                    _mid++;
+                }
+                else if (dr[""].ToString() == "")
+                {
+                    _short++;
+                }
+                else
+                {
+                    _noTallInfor++;
+                }
+
+                ///Theo loại hàng
+                if (dr[""].ToString() == "")
+                {
+                    _z5++;
+                }
+                else if (dr[""].ToString() == "")
+                {
+                    _i15++;
+                }
+                else if (dr[""].ToString() == "")
+                {
+                    _s24++;
+                }
+                else
+                {
+                    _noPrdInfor++;
+                }
+            }
+            uc_ReportByMaterialType.Good.Values = new ChartValues<double> { _tall };
+            uc_ReportByMaterialType.Normal.Values = new ChartValues<double> { _mid };
+            uc_ReportByMaterialType.Other.Values = new ChartValues<double> { _short };
+            uc_ReportByMaterialType.Warning.Values = new ChartValues<double> { _noTallInfor };
+
+            uc_ReportByMaterialType.Good.Title = "GALAXY Z FOLD 5";
+            uc_ReportByMaterialType.Normal.Title = "IPHONE 15 PROMAX";
+            uc_ReportByMaterialType.Other.Title = "SAMSUNG S24 ULTRA";
+            uc_ReportByMaterialType.Warning.Title = "Không có thông tin";
+
+
+            uc_ReportByTall.Good.Values = new ChartValues<double> { _z5 };
+            uc_ReportByTall.Normal.Values = new ChartValues<double> { _i15 };
+            uc_ReportByTall.Other.Values = new ChartValues<double> { _s24 };
+            uc_ReportByTall.Warning.Values = new ChartValues<double> { _noPrdInfor };
+
+            uc_ReportByTall.Good.Title = "CAO";
+            uc_ReportByTall.Normal.Title = "TRUNG BÌNH";
+            uc_ReportByTall.Other.Title = "THẤP";
+            uc_ReportByTall.Warning.Title = "Không có thông tin";
 
         }
 

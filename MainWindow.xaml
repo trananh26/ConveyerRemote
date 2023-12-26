@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:v="clr-namespace:CaptureWebcam.View"
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
@@ -147,6 +148,20 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <DataGrid x:Name="dtg_MaterialInfor"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <v:PieChartExample x:Name="uc_ReportByTall"/>
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <v:PieChartExample x:Name="uc_ReportByMaterialType"/>
+                        </Grid>
                     </Grid>
                 </Grid>
                 <Grid Grid.Column="1" >

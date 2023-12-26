@@ -1,21 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\Conveyer_Remote\\CaptureWebcam.csproj": {}
+    "D:\\GitHub\\Conveyer_Remote\\CaptureWebcam.csproj": {}
   },
   "projects": {
-    "D:\\Github\\Conveyer_Remote\\CaptureWebcam.csproj": {
+    "D:\\GitHub\\Conveyer_Remote\\CaptureWebcam.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\Conveyer_Remote\\CaptureWebcam.csproj",
+        "projectUniqueName": "D:\\GitHub\\Conveyer_Remote\\CaptureWebcam.csproj",
         "projectName": "CaptureWebcam",
-        "projectPath": "D:\\Github\\Conveyer_Remote\\CaptureWebcam.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\Conveyer_Remote\\obj\\",
+        "projectPath": "D:\\GitHub\\Conveyer_Remote\\CaptureWebcam.csproj",
+        "packagesPath": "C:\\Users\\ttanh3\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\Conveyer_Remote\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ttanh3\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
