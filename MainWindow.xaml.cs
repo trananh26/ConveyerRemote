@@ -84,8 +84,8 @@ namespace CaptureWebcam
         {
             try
             {
-                PLC.ActLogicalStationNumber = 10; //Simulation
-                //PLC.ActLogicalStationNumber = 20;   //PLC thực
+                //PLC.ActLogicalStationNumber = 10; //Simulation
+                PLC.ActLogicalStationNumber = 20;   //PLC thực
                 PLC.Open();
                 PLC.SetDevice("M1", 1);
 
