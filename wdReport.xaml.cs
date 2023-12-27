@@ -92,16 +92,16 @@ namespace CaptureWebcam
             }
 
             uc_ReportByTimeHeight.srTall.Title = "Cao";
-            uc_ReportByTimeHeight.srTall.Values = new ChartValues<double> { 10, 5, 10, 8, 2, _tall };
+            uc_ReportByTimeHeight.srTall.Values = new ChartValues<double> { 10, 5, 10, 8, 8, _tall };
 
             uc_ReportByTimeHeight.srMid.Title = "Trung bình";
-            uc_ReportByTimeHeight.srMid.Values = new ChartValues<double> { 2, 6, 10, 11, 1, _mid };
+            uc_ReportByTimeHeight.srMid.Values = new ChartValues<double> { 2, 6, 10, 11, 9, _mid };
 
             uc_ReportByTimeHeight.srShort.Title = "Thấp";
-            uc_ReportByTimeHeight.srShort.Values = new ChartValues<double> { 4, 2, 1, 2, 3, _short };
+            uc_ReportByTimeHeight.srShort.Values = new ChartValues<double> { 4, 2, 1, 2, 12, _short };
 
             uc_ReportByTimeHeight.srOther.Title = "Không có thông tin";
-            uc_ReportByTimeHeight.srOther.Values = new ChartValues<double> { 6, 5, 10, 9, 3, _noTallInfor };
+            uc_ReportByTimeHeight.srOther.Values = new ChartValues<double> { 6, 5, 10, 9, 10, _noTallInfor };
 
             uc_ReportByTimeHeight.Label.Labels = new[] {DateTime.Now.Date.AddDays(-5).ToString("dd/MM/yyyy"), DateTime.Now.Date.AddDays(-4).ToString("dd/MM/yyyy"), DateTime.Now.Date.AddDays(-3).ToString("dd/MM/yyyy"),
                 DateTime.Now.Date.AddDays(-2).ToString("dd/MM/yyyy"),DateTime.Now.Date.AddDays(-1).ToString("dd/MM/yyyy"),DateTime.Now.Date.ToString("dd/MM/yyyy") };
@@ -111,10 +111,10 @@ namespace CaptureWebcam
 
             //Dữ liệu vận hành trong tuần
             uc_ReportByTimeMaterial.srTall.Title = "GALAXY Z FOLD 5";
-            uc_ReportByTimeMaterial.srTall.Values = new ChartValues<double> { 6, 5, 10, 8, 3, _z5 };// double.Parse(dtReport.Rows[0]["Complete"].ToString()) };
+            uc_ReportByTimeMaterial.srTall.Values = new ChartValues<double> { 6, 5, 10, 8, 9, _z5 };// double.Parse(dtReport.Rows[0]["Complete"].ToString()) };
 
             uc_ReportByTimeMaterial.srMid.Title = "IPHONE 15 PROMAX";
-            uc_ReportByTimeMaterial.srMid.Values = new ChartValues<double> { 5, 8, 9, 6, 3, _i15 };// double.Parse(dtReport.Rows[0]["Cancel"].ToString()) };
+            uc_ReportByTimeMaterial.srMid.Values = new ChartValues<double> { 5, 8, 9, 6, 7, _i15 };// double.Parse(dtReport.Rows[0]["Cancel"].ToString()) };
 
             uc_ReportByTimeMaterial.srShort.Title = "SAMSUNG S24 ULTRA";
             uc_ReportByTimeMaterial.srShort.Values = new ChartValues<double> { 8, 5, 10, 15, 1, _s24 };// double.Parse(dtReport.Rows[0]["Transfering"].ToString()) };
@@ -138,15 +138,15 @@ namespace CaptureWebcam
             foreach (DataRow dr in dt.Rows)
             {
                 ///Theo chiều cao
-                if (dr[""].ToString() == "")
+                if (dr["ProductHeight"].ToString() == "Tall")
                 {
                     _tall++;
                 }
-                else if (dr[""].ToString() == "")
+                else if (dr["ProductHeight"].ToString() == "Mid")
                 {
                     _mid++;
                 }
-                else if (dr[""].ToString() == "")
+                else if (dr["ProductHeight"].ToString() == "Short")
                 {
                     _short++;
                 }
@@ -156,15 +156,15 @@ namespace CaptureWebcam
                 }
 
                 ///Theo loại hàng
-                if (dr[""].ToString() == "")
+                if (dr["ProductCode"].ToString() == "GALAXY Z FOLD 5")
                 {
                     _z5++;
                 }
-                else if (dr[""].ToString() == "")
+                else if (dr["ProductCode"].ToString() == "IPHONE 15 PROMAX")
                 {
                     _i15++;
                 }
-                else if (dr[""].ToString() == "")
+                else if (dr["ProductCode"].ToString() == "SAMSUNG S24 ULTRA")
                 {
                     _s24++;
                 }
@@ -173,10 +173,11 @@ namespace CaptureWebcam
                     _noPrdInfor++;
                 }
             }
-            uc_ReportByMaterialType.Good.Values = new ChartValues<double> { _tall };
-            uc_ReportByMaterialType.Normal.Values = new ChartValues<double> { _mid };
-            uc_ReportByMaterialType.Other.Values = new ChartValues<double> { _short };
-            uc_ReportByMaterialType.Warning.Values = new ChartValues<double> { _noTallInfor };
+
+            uc_ReportByMaterialType.Good.Values = new ChartValues<double> { _z5 };
+            uc_ReportByMaterialType.Normal.Values = new ChartValues<double> { _i15 };
+            uc_ReportByMaterialType.Other.Values = new ChartValues<double> { _s24 };
+            uc_ReportByMaterialType.Warning.Values = new ChartValues<double> { _noPrdInfor };
 
             uc_ReportByMaterialType.Good.Title = "GALAXY Z FOLD 5";
             uc_ReportByMaterialType.Normal.Title = "IPHONE 15 PROMAX";
@@ -184,15 +185,16 @@ namespace CaptureWebcam
             uc_ReportByMaterialType.Warning.Title = "Không có thông tin";
 
 
-            uc_ReportByTall.Good.Values = new ChartValues<double> { _z5 };
-            uc_ReportByTall.Normal.Values = new ChartValues<double> { _i15 };
-            uc_ReportByTall.Other.Values = new ChartValues<double> { _s24 };
-            uc_ReportByTall.Warning.Values = new ChartValues<double> { _noPrdInfor };
+            uc_ReportByTall.Good.Values = new ChartValues<double> { _tall };
+            uc_ReportByTall.Normal.Values = new ChartValues<double> { _mid };
+            uc_ReportByTall.Other.Values = new ChartValues<double> { _short };
+            uc_ReportByTall.Warning.Values = new ChartValues<double> { _noTallInfor };
 
             uc_ReportByTall.Good.Title = "CAO";
             uc_ReportByTall.Normal.Title = "TRUNG BÌNH";
             uc_ReportByTall.Other.Title = "THẤP";
             uc_ReportByTall.Warning.Title = "Không có thông tin";
+
         }
 
         private void btnSendReport_Click(object sender, RoutedEventArgs e)

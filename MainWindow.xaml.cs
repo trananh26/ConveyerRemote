@@ -84,8 +84,8 @@ namespace CaptureWebcam
         {
             try
             {
-                //PLC.ActLogicalStationNumber = 10; //Simulation
-                PLC.ActLogicalStationNumber = 20;   //PLC thực
+                PLC.ActLogicalStationNumber = 10; //Simulation
+                //PLC.ActLogicalStationNumber = 20;   //PLC thực
                 PLC.Open();
                 PLC.SetDevice("M1", 1);
 
@@ -98,7 +98,7 @@ namespace CaptureWebcam
         }
         private void TimerPing_Tick(object sender, EventArgs e)
         {
-            PingPLC();
+            //PingPLC();
         }
 
         private void PingPLC()
@@ -161,7 +161,7 @@ namespace CaptureWebcam
         //Tạo lệnh trong trường hợp không đọc được QR Code
         private void Timer_CheckIP_Tick(object sender, EventArgs e)
         {
-            if (txtQRCode.Text == _oldQRCode)
+            if (txtQRCode.Text == _oldQRCode || txtQRCode.Text == string.Empty)
             {
                 PLC.SetDevice("M510", 1);
                 psWait = 1;
@@ -176,13 +176,13 @@ namespace CaptureWebcam
                 ///
                 string _commandID = DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + _material.ProductCode;
                 oBL.InsertHistory(_material, _commandID);
-            }          
+            }
 
             Timer_CheckIP.Stop();
             GetPerforment();
 
             ///Dừng 0.5s rồi reset trạng thái
-            Thread.Sleep(500);
+            Thread.Sleep(1500);
             PLC.SetDevice("M510", 0);
             PLC.SetDevice("M20", 0);
         }
@@ -240,7 +240,7 @@ namespace CaptureWebcam
                 GetPerforment();
 
                 ///Dừng 0.5s rồi reset trạng thái
-                Thread.Sleep(500);
+                Thread.Sleep(1500);
                 PLC.SetDevice("M510", 0);
                 PLC.SetDevice("M20", 0);
             }
@@ -294,7 +294,7 @@ namespace CaptureWebcam
 
                 filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
-                captureDevice = new VideoCaptureDevice(filterInfo[0].MonikerString);
+                captureDevice = new VideoCaptureDevice(filterInfo[1].MonikerString);
                 captureDevice.NewFrame += CaptureDevice_NewFrame;
                 captureDevice.Start();
 
@@ -304,6 +304,12 @@ namespace CaptureWebcam
             {
                 this.Close();
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            PLC.Close();
+            captureDevice.Stop();
         }
 
         /// <summary>
@@ -354,10 +360,11 @@ namespace CaptureWebcam
                     _noPrdInfor++;
                 }
             }
-            uc_ReportByMaterialType.Good.Values = new ChartValues<double> { _tall };
-            uc_ReportByMaterialType.Normal.Values = new ChartValues<double> { _mid };
-            uc_ReportByMaterialType.Other.Values = new ChartValues<double> { _short };
-            uc_ReportByMaterialType.Warning.Values = new ChartValues<double> { _noTallInfor };
+
+            uc_ReportByMaterialType.Good.Values = new ChartValues<double> { _z5 };
+            uc_ReportByMaterialType.Normal.Values = new ChartValues<double> { _i15 };
+            uc_ReportByMaterialType.Other.Values = new ChartValues<double> { _s24 };
+            uc_ReportByMaterialType.Warning.Values = new ChartValues<double> { _noPrdInfor };
 
             uc_ReportByMaterialType.Good.Title = "GALAXY Z FOLD 5";
             uc_ReportByMaterialType.Normal.Title = "IPHONE 15 PROMAX";
@@ -365,15 +372,20 @@ namespace CaptureWebcam
             uc_ReportByMaterialType.Warning.Title = "Không có thông tin";
 
 
-            uc_ReportByTall.Good.Values = new ChartValues<double> { _z5 };
-            uc_ReportByTall.Normal.Values = new ChartValues<double> { _i15 };
-            uc_ReportByTall.Other.Values = new ChartValues<double> { _s24 };
-            uc_ReportByTall.Warning.Values = new ChartValues<double> { _noPrdInfor };
+            uc_ReportByTall.Good.Values = new ChartValues<double> { _tall };
+            uc_ReportByTall.Normal.Values = new ChartValues<double> { _mid };
+            uc_ReportByTall.Other.Values = new ChartValues<double> { _short };
+            uc_ReportByTall.Warning.Values = new ChartValues<double> { _noTallInfor };
 
             uc_ReportByTall.Good.Title = "CAO";
             uc_ReportByTall.Normal.Title = "TRUNG BÌNH";
             uc_ReportByTall.Other.Title = "THẤP";
             uc_ReportByTall.Warning.Title = "Không có thông tin";
+
+            PLC.SetDevice("D200", int.Parse(_tall.ToString()));
+            PLC.SetDevice("D210", int.Parse(_mid.ToString()));
+            PLC.SetDevice("D220", int.Parse(_short.ToString()));
+            PLC.SetDevice("D230", int.Parse(_noTallInfor.ToString()));
 
         }
 
