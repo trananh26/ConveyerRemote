@@ -98,7 +98,7 @@ namespace CaptureWebcam
         }
         private void TimerPing_Tick(object sender, EventArgs e)
         {
-            //PingPLC();
+            PingPLC();
         }
 
         private void PingPLC()
@@ -156,24 +156,14 @@ namespace CaptureWebcam
                 Timer_CheckIP.Start();
 
             }
-
-            //if (SS2 == 1)
-            //{
-
-            //}
-
-            //if (SS3 == 1)
-            //{
-
-            //}
-
         }
 
         //Tạo lệnh trong trường hợp không đọc được QR Code
         private void Timer_CheckIP_Tick(object sender, EventArgs e)
         {
-            if (txtQRCode.Text == _oldQRCode || psWait == 1)
+            if (txtQRCode.Text == _oldQRCode)
             {
+                PLC.SetDevice("M510", 1);
                 psWait = 1;
 
                 clsMaterial _material = new clsMaterial();
@@ -186,20 +176,15 @@ namespace CaptureWebcam
                 ///
                 string _commandID = DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + _material.ProductCode;
                 oBL.InsertHistory(_material, _commandID);
-            }
-            if (psWait == 1)
-            {
-
-                // hàng k có mã QRcode hoặc đọc lỗi ==> on M510 để đẩy xylanh
-                PLC.SetDevice("M510", 1);
-
-            }
-            else
-            {
-                PLC.SetDevice("M20", 1);
-            }
+            }          
 
             Timer_CheckIP.Stop();
+            GetPerforment();
+
+            ///Dừng 0.5s rồi reset trạng thái
+            Thread.Sleep(500);
+            PLC.SetDevice("M510", 0);
+            PLC.SetDevice("M20", 0);
         }
 
         /// <summary>
@@ -213,6 +198,7 @@ namespace CaptureWebcam
                 dt = oBL.GetMaterialInforByCode(qrcode);
                 if (dt.Rows.Count == 0)
                 {
+                    PLC.SetDevice("M510", 1);
                     //Xử lý chờ đẩy ra chỗ k có thông tin hàng
                     psWait = 1;
 
@@ -226,9 +212,13 @@ namespace CaptureWebcam
                     ///
                     string _commandID = DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + qrcode + "_" + _material.ProductCode;
                     oBL.InsertHistory(_material, _commandID);
+
+                    Timer_CheckIP.Stop();
                 }
                 else
                 {
+                    PLC.SetDevice("M20", 1);
+
                     psWait = 0;
 
                     lstMaterial.Clear();
@@ -244,8 +234,15 @@ namespace CaptureWebcam
                     ///
                     string _commandID = DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + qrcode + "_" + _material.ProductCode;
                     oBL.InsertHistory(_material, _commandID);
+
+                    Timer_CheckIP.Stop();
                 }
                 GetPerforment();
+
+                ///Dừng 0.5s rồi reset trạng thái
+                Thread.Sleep(500);
+                PLC.SetDevice("M510", 0);
+                PLC.SetDevice("M20", 0);
             }
             catch (Exception)
             {
